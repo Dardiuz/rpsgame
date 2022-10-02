@@ -1,43 +1,54 @@
-//rock paper scissor game player vs computer played in the console
-//game will have 5 rounds (loop)
-//return results
-//compare player + computer input for results
-//win or lose text in the console
-//player input by prompt
-//player input validation (spelling & case sensitivity)
+// rock paper scissor game, 5 rounds
+// vs computer played completely in the console
 
-//computer choice randomized
-let playerScore = 0;
 let computerScore = 0;
+let playerScore = 0;
 
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
-console.log(getComputerChoice());
-
 function playRound(playerSelection, computerSelection) {
+  // console.log("1", playerSelection, "2", computerSelection);
   if (playerSelection === computerSelection) {
-    return "You tied! You both picked ${playerSelection}";
+    return "You Tied!";
+  } else if (playerSelection === "rock" && computerSelection === "paper") {
+    computerScore++;
+    return "You lose!";
+  } else if (playerSelection === "paper" && computerSelection === "scissors") {
+    computerScore++;
+    return "You lose!";
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    compScore++;
-    return "You Lost! Rock destroys scissors";
-  } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    compScore++;
-    return "You Lost! Rock destroys scissors";
+    computerScore++;
+    return "You lose!";
+  } else if (playerSelection === "rock" && computerSelection === "scissors") {
+    playerScore++;
+    return "You win!";
+  } else if (playerSelection === "scissors" && computerSelection === "paper") {
+    playerScore++;
+    return "You win!";
+  } else if (playerSelection === "paper" && computerSelection === "rock") {
+    playerScore++;
+    return "You win!";
   }
 }
-
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
 
 function game() {
   for (let i = 0; i < 5; i++) {
     const playerSelection = prompt(
-      "Choose wisely: 'Rock', 'Paper' or 'Scissors' "
+      "Type 'Rock', 'Paper' or 'Scissors' to play a game"
     ).toLowerCase();
     const computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
+    console.log("1", playRound(playerSelection, computerSelection));
+  }
+  if (playerScore > computerScore) {
+    return "Games Completed, You beat the computer!";
+  } else if (playerScore < computerScore) {
+    return "Games Completed, You lost try again";
+  } else {
+    return "Games Completed, you Tied";
   }
 }
+
+console.log(game());
